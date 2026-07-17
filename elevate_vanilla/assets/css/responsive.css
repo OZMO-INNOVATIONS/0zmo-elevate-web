@@ -1,0 +1,76 @@
+/* ═══════════════════════════════════════════════════════════
+   OZMO ELEVATE — Premium Responsive Rules
+   responsive.css
+═══════════════════════════════════════════════════════════ */
+
+/* ── Tablet (1024px) ── */
+@media (max-width: 1024px) {
+  /* Hide Desktop Nav */
+  .nav-links, .nav-cta { display: none; }
+  .hamburger { display: flex; }
+
+  /* Hero */
+  .hero-headline { font-size: clamp(3rem, 10vw, 5rem); }
+  
+  /* Marquee */
+  .marquee-content span { font-size: 2rem; }
+
+  /* Grids */
+  .vision-grid { grid-template-columns: 1fr; gap: 3rem; }
+  .vision-visual { order: -1; }
+  
+  .academy-grid { grid-template-columns: repeat(2, 1fr); }
+  
+  .impact-grid { grid-template-columns: repeat(2, 1fr); gap: 3rem; }
+  
+  .cta-grid { grid-template-columns: 1fr; gap: 4rem; }
+  
+  /* Footer */
+  .footer-grid { grid-template-columns: repeat(2, 1fr); gap: 3rem; }
+}
+
+/* ── Mobile Landscape / Small Tablet (768px) ── */
+@media (max-width: 768px) {
+  section { padding: 5rem 0; }
+  
+  .hero { padding-top: 8rem; padding-bottom: 4rem; }
+  .hero-actions { flex-direction: column; gap: 1.5rem; }
+  .hero-avatars { justify-content: center; margin-top: 1rem; }
+  
+  .academy-grid { grid-template-columns: 1fr; }
+  
+  .impact-wrapper { padding: 3rem 1.5rem; }
+  
+  .form-row { grid-template-columns: 1fr; gap: 1.5rem; }
+  .cta-form-wrap { padding: 2rem 1.5rem; }
+  
+  .mentor-track { padding: 0; }
+  .mentor-card { width: 280px; }
+}
+
+/* ── Mobile Portrait (480px) ── */
+@media (max-width: 480px) {
+  .hero-headline { font-size: 2.75rem; }
+  .hero-sub { font-size: 1rem; }
+  
+  .sec-title { font-size: 2.25rem; }
+  
+  .impact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+  .stat-val { font-size: 3rem; }
+  
+  .footer-grid { grid-template-columns: 1fr; }
+  .footer-bottom { flex-direction: column; gap: 1.5rem; text-align: center; }
+  .footer-legal { justify-content: center; }
+  
+  .c-method { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
+}
+
+/* ── Touch Devices (Disable Hover Effects) ── */
+@media (hover: none) {
+  .cursor-dot, .cursor-ring { display: none !important; }
+  .magnetic, [data-tilt] { transition: none !important; transform: none !important; }
+  
+  .academy-card:hover { transform: none; border-color: var(--border-subtle); }
+  .mentor-card:hover { transform: none; }
+  .mentor-img img { filter: grayscale(0%); }
+}
