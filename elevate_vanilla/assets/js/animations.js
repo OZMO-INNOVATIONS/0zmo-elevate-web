@@ -7,16 +7,16 @@
    PARTICLE CANVAS
 ══════════════════════════════ */
 function initParticleCanvas() {
-  const canvas = document.getElementById('heroCanvas');
+  const canvas = document.getElementById("heroCanvas");
   if (!canvas) return;
-  const ctx = canvas.getContext('2d');
+  const ctx = canvas.getContext("2d");
 
   function resize() {
     canvas.width = canvas.offsetWidth;
     canvas.height = canvas.offsetHeight;
   }
   resize();
-  window.addEventListener('resize', resize);
+  window.addEventListener("resize", resize);
 
   const particles = [];
   const PARTICLE_COUNT = 80;
@@ -32,13 +32,23 @@ function initParticleCanvas() {
       this.speedX = (Math.random() - 0.5) * 0.4;
       this.speedY = (Math.random() - 0.5) * 0.4;
       this.opacity = Math.random() * 0.5 + 0.1;
-      const colors = ['rgba(124,58,237,', 'rgba(6,182,212,', 'rgba(236,72,153,', 'rgba(167,139,250,'];
+      const colors = [
+        "rgba(124,58,237,",
+        "rgba(6,182,212,",
+        "rgba(236,72,153,",
+        "rgba(167,139,250,",
+      ];
       this.color = colors[Math.floor(Math.random() * colors.length)];
     }
     update() {
       this.x += this.speedX;
       this.y += this.speedY;
-      if (this.x < 0 || this.x > canvas.width || this.y < 0 || this.y > canvas.height) {
+      if (
+        this.x < 0 ||
+        this.x > canvas.width ||
+        this.y < 0 ||
+        this.y > canvas.height
+      ) {
         this.reset();
       }
     }
@@ -83,71 +93,79 @@ function initParticleCanvas() {
    SCROLL ANIMATIONS (IntersectionObserver)
 ══════════════════════════════ */
 function initScrollAnimations() {
-  const targets = document.querySelectorAll('.fade-in, .fade-left, .fade-right, .scale-in');
+  const targets = document.querySelectorAll(
+    ".fade-in, .fade-left, .fade-right, .scale-in",
+  );
   if (!targets.length) return;
 
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        observer.unobserve(entry.target);
-      }
-    });
-  }, {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
-  });
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    {
+      threshold: 0.1,
+      rootMargin: "0px 0px -50px 0px",
+    },
+  );
 
-  targets.forEach(el => observer.observe(el));
+  targets.forEach((el) => observer.observe(el));
 }
 
 /* ══════════════════════════════
    COUNT UP
 ══════════════════════════════ */
 function initCountUp() {
-  const counters = document.querySelectorAll('.counter');
+  const counters = document.querySelectorAll(".counter");
   if (!counters.length) return;
 
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const el = entry.target;
-        const target = parseInt(el.dataset.target, 10);
-        const duration = 2000;
-        const start = performance.now();
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const el = entry.target;
+          const target = parseInt(el.dataset.target, 10);
+          const duration = 2000;
+          const start = performance.now();
 
-        function tick(now) {
-          const elapsed = now - start;
-          const progress = Math.min(elapsed / duration, 1);
-          const eased = 1 - Math.pow(1 - progress, 3);
-          el.textContent = Math.floor(eased * target);
-          if (progress < 1) requestAnimationFrame(tick);
-          else el.textContent = target;
+          function tick(now) {
+            const elapsed = now - start;
+            const progress = Math.min(elapsed / duration, 1);
+            const eased = 1 - Math.pow(1 - progress, 3);
+            el.textContent = Math.floor(eased * target);
+            if (progress < 1) requestAnimationFrame(tick);
+            else el.textContent = target;
+          }
+          requestAnimationFrame(tick);
+          observer.unobserve(el);
         }
-        requestAnimationFrame(tick);
-        observer.unobserve(el);
-      }
-    });
-  }, { threshold: 0.5 });
+      });
+    },
+    { threshold: 0.5 },
+  );
 
-  counters.forEach(el => observer.observe(el));
+  counters.forEach((el) => observer.observe(el));
 }
 
 /* ══════════════════════════════
    NAVBAR SCROLL
 ══════════════════════════════ */
 function initNavbarScroll() {
-  const navbar = document.getElementById('navbar');
+  const navbar = document.getElementById("navbar");
   if (!navbar) return;
 
   const handler = () => {
     if (window.scrollY > 60) {
-      navbar.classList.add('scrolled');
+      navbar.classList.add("scrolled");
     } else {
-      navbar.classList.remove('scrolled');
+      navbar.classList.remove("scrolled");
     }
   };
-  window.addEventListener('scroll', handler, { passive: true });
+  window.addEventListener("scroll", handler, { passive: true });
   handler();
 }
 
@@ -155,53 +173,61 @@ function initNavbarScroll() {
    SCROLL PROGRESS BAR
 ══════════════════════════════ */
 function initScrollProgress() {
-  const bar = document.getElementById('scrollProgress');
+  const bar = document.getElementById("scrollProgress");
   if (!bar) return;
-  window.addEventListener('scroll', () => {
-    const total = document.documentElement.scrollHeight - window.innerHeight;
-    bar.style.width = (window.scrollY / total * 100) + '%';
-  }, { passive: true });
+  window.addEventListener(
+    "scroll",
+    () => {
+      const total = document.documentElement.scrollHeight - window.innerHeight;
+      bar.style.width = (window.scrollY / total) * 100 + "%";
+    },
+    { passive: true },
+  );
 }
 
 /* ══════════════════════════════
    CUSTOM CURSOR
 ══════════════════════════════ */
 function initCustomCursor() {
-  const dot = document.getElementById('cursorDot');
-  const ring = document.getElementById('cursorRing');
+  const dot = document.getElementById("cursorDot");
+  const ring = document.getElementById("cursorRing");
   if (!dot || !ring) return;
-  if (window.matchMedia('(pointer: coarse)').matches) return;
+  if (window.matchMedia("(pointer: coarse)").matches) return;
 
-  let mouseX = 0, mouseY = 0;
-  let ringX = 0, ringY = 0;
+  let mouseX = 0,
+    mouseY = 0;
+  let ringX = 0,
+    ringY = 0;
 
-  document.addEventListener('mousemove', e => {
+  document.addEventListener("mousemove", (e) => {
     mouseX = e.clientX;
     mouseY = e.clientY;
-    dot.style.left = mouseX + 'px';
-    dot.style.top = mouseY + 'px';
+    dot.style.left = mouseX + "px";
+    dot.style.top = mouseY + "px";
   });
 
   function animateRing() {
     ringX += (mouseX - ringX) * 0.12;
     ringY += (mouseY - ringY) * 0.12;
-    ring.style.left = ringX + 'px';
-    ring.style.top = ringY + 'px';
+    ring.style.left = ringX + "px";
+    ring.style.top = ringY + "px";
     requestAnimationFrame(animateRing);
   }
   animateRing();
 
-  const hoverEls = document.querySelectorAll('a, button, .course-card, .why-card, .mentor-card, .journey-step');
-  hoverEls.forEach(el => {
-    el.addEventListener('mouseenter', () => ring.classList.add('hover'));
-    el.addEventListener('mouseleave', () => ring.classList.remove('hover'));
+  const hoverEls = document.querySelectorAll(
+    "a, button, .course-card, .why-card, .mentor-card, .journey-step",
+  );
+  hoverEls.forEach((el) => {
+    el.addEventListener("mouseenter", () => ring.classList.add("hover"));
+    el.addEventListener("mouseleave", () => ring.classList.remove("hover"));
   });
 }
 
 /* ══════════════════════════════
    INIT ALL
 ══════════════════════════════ */
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener("DOMContentLoaded", () => {
   initParticleCanvas();
   initScrollAnimations();
   initCountUp();
