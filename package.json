@@ -1,0 +1,9 @@
+{
+  "name": "ozmo-elevate-web",
+  "version": "1.0.0",
+  "description": "Ozmo Elevate website hosted on Vercel",
+  "scripts": {
+    "dev": "npx -y http-server . -p 3000",
+    "start": "npx -y http-server . -p 3000"
+  }
+}
