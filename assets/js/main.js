@@ -219,7 +219,8 @@ function initForm() {
 
   form.addEventListener("submit", (e) => {
     e.preventDefault();
-    const btn = document.getElementById("submitBtn");
+    const btn = form.querySelector("button[type='submit']") || document.getElementById("submitBtn");
+    if (!btn) return;
     const text = btn.querySelector(".btn-text");
 
     btn.style.pointerEvents = "none";
