@@ -1,0 +1,21 @@
+{
+  "name": "OZMO Elevate — Next-Gen Tech Academy",
+  "short_name": "OZMO Elevate",
+  "description": "Master Full Stack Engineering, AI & Machine Learning, App Development, UI/UX Design, Python Data Science, and Digital Marketing.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a0a0f",
+  "theme_color": "#00f0ff",
+  "icons": [
+    {
+      "src": "/assets/images/logo3.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/images/logo3.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

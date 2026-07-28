@@ -5,15 +5,16 @@
 
 /* ── Hero Text Reveal ── */
 .reveal-up {
-  transform: translateY(100%);
   opacity: 0;
-  animation: revealUpAnim 1s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+  transform: translateY(20px);
+  animation: revealUpAnim 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
+
 .hero-headline .line {
-  overflow: hidden;
-  padding-bottom: 0.2em;
-  margin-bottom: -0.2em;
+  overflow: visible;
+  padding-bottom: 0.1em;
 }
+
 .reveal-up[data-delay="0"] {
   animation-delay: 0s;
 }
@@ -31,24 +32,31 @@
 }
 
 @keyframes revealUpAnim {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
   to {
-    transform: translateY(0);
     opacity: 1;
+    transform: translateY(0);
   }
 }
 
 /* ── Scroll Reveals (Intersection Observer) ── */
 .fade-in-up {
   opacity: 0;
-  transform: translateY(40px);
+  transform: translateY(30px);
   transition:
     opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
     transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
 }
+
 .fade-in-up.visible {
-  opacity: 1;
-  transform: translateY(0);
+  opacity: 1 !important;
+  transform: translateY(0) !important;
 }
+
 /* Staggering delays for scroll elements */
 .fade-in-up[data-delay="0"] {
   transition-delay: 0s;
@@ -69,14 +77,14 @@
   transition-delay: 0.5s;
 }
 
-/* ── Magnetic Hover (JS calculates transform, CSS handles transition) ── */
+/* ── Magnetic Hover ── */
 .magnetic {
   display: inline-block;
   transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
   will-change: transform;
 }
 
-/* ── 3D Card Tilt (JS applies transform, CSS handles resting transition) ── */
+/* ── 3D Card Tilt ── */
 [data-tilt] {
   transition:
     transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1),

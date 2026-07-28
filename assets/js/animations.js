@@ -66,7 +66,6 @@ function initParticleCanvas() {
 
   function animate() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    // Draw connections
     for (let i = 0; i < particles.length; i++) {
       for (let j = i + 1; j < particles.length; j++) {
         const dx = particles[i].x - particles[j].x;
@@ -94,7 +93,7 @@ function initParticleCanvas() {
 ══════════════════════════════ */
 function initScrollAnimations() {
   const targets = document.querySelectorAll(
-    ".fade-in, .fade-left, .fade-right, .scale-in",
+    ".fade-in-up, .fade-in, .fade-left, .fade-right, .scale-in, .reveal-up"
   );
   if (!targets.length) return;
 
@@ -108,12 +107,18 @@ function initScrollAnimations() {
       });
     },
     {
-      threshold: 0.1,
-      rootMargin: "0px 0px -50px 0px",
-    },
+      threshold: 0.01,
+      rootMargin: "100px 0px 100px 0px",
+    }
   );
 
-  targets.forEach((el) => observer.observe(el));
+  targets.forEach((el) => {
+    const rect = el.getBoundingClientRect();
+    if (rect.top < window.innerHeight + 100 && rect.bottom > -100) {
+      el.classList.add("visible");
+    }
+    observer.observe(el);
+  });
 }
 
 /* ══════════════════════════════
@@ -145,7 +150,7 @@ function initCountUp() {
         }
       });
     },
-    { threshold: 0.5 },
+    { threshold: 0.2 }
   );
 
   counters.forEach((el) => observer.observe(el));
@@ -179,59 +184,27 @@ function initScrollProgress() {
     "scroll",
     () => {
       const total = document.documentElement.scrollHeight - window.innerHeight;
-      bar.style.width = (window.scrollY / total) * 100 + "%";
+      if (total > 0) {
+        bar.style.width = (window.scrollY / total) * 100 + "%";
+      }
     },
-    { passive: true },
+    { passive: true }
   );
-}
-
-/* ══════════════════════════════
-   CUSTOM CURSOR
-══════════════════════════════ */
-function initCustomCursor() {
-  const dot = document.getElementById("cursorDot");
-  const ring = document.getElementById("cursorRing");
-  if (!dot || !ring) return;
-  if (window.matchMedia("(pointer: coarse)").matches) return;
-
-  let mouseX = 0,
-    mouseY = 0;
-  let ringX = 0,
-    ringY = 0;
-
-  document.addEventListener("mousemove", (e) => {
-    mouseX = e.clientX;
-    mouseY = e.clientY;
-    dot.style.left = mouseX + "px";
-    dot.style.top = mouseY + "px";
-  });
-
-  function animateRing() {
-    ringX += (mouseX - ringX) * 0.12;
-    ringY += (mouseY - ringY) * 0.12;
-    ring.style.left = ringX + "px";
-    ring.style.top = ringY + "px";
-    requestAnimationFrame(animateRing);
-  }
-  animateRing();
-
-  const hoverEls = document.querySelectorAll(
-    "a, button, .course-card, .why-card, .mentor-card, .journey-step",
-  );
-  hoverEls.forEach((el) => {
-    el.addEventListener("mouseenter", () => ring.classList.add("hover"));
-    el.addEventListener("mouseleave", () => ring.classList.remove("hover"));
-  });
 }
 
 /* ══════════════════════════════
    INIT ALL
 ══════════════════════════════ */
-document.addEventListener("DOMContentLoaded", () => {
+function runAllAnimations() {
   initParticleCanvas();
   initScrollAnimations();
   initCountUp();
   initNavbarScroll();
   initScrollProgress();
-  initCustomCursor();
-});
+}
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", runAllAnimations);
+} else {
+  runAllAnimations();
+}

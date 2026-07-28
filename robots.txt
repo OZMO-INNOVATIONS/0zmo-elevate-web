@@ -1,0 +1,7 @@
+# Allow all search engine bots to crawl the site
+User-agent: *
+Allow: /
+
+# Host & Sitemap location
+Host: https://ozmoelevate.com
+Sitemap: https://ozmoelevate.com/sitemap.xml
