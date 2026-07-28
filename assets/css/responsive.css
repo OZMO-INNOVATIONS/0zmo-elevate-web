@@ -41,7 +41,6 @@ body {
 
 /* ── Tablet / Small Laptop (1024px and below) ── */
 @media (max-width: 1024px) {
-
   /* Navigation */
   .nav-links,
   .nav-cta {
@@ -508,7 +507,6 @@ body {
 
 /* ── Touch Devices & Reduced Motion ── */
 @media (hover: none) {
-
   .cursor-dot,
   .cursor-ring {
     display: none !important;

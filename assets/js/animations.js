@@ -93,7 +93,7 @@ function initParticleCanvas() {
 ══════════════════════════════ */
 function initScrollAnimations() {
   const targets = document.querySelectorAll(
-    ".fade-in-up, .fade-in, .fade-left, .fade-right, .scale-in, .reveal-up"
+    ".fade-in-up, .fade-in, .fade-left, .fade-right, .scale-in, .reveal-up",
   );
   if (!targets.length) return;
 
@@ -109,7 +109,7 @@ function initScrollAnimations() {
     {
       threshold: 0.01,
       rootMargin: "100px 0px 100px 0px",
-    }
+    },
   );
 
   targets.forEach((el) => {
@@ -150,7 +150,7 @@ function initCountUp() {
         }
       });
     },
-    { threshold: 0.2 }
+    { threshold: 0.2 },
   );
 
   counters.forEach((el) => observer.observe(el));
@@ -188,7 +188,7 @@ function initScrollProgress() {
         bar.style.width = (window.scrollY / total) * 100 + "%";
       }
     },
-    { passive: true }
+    { passive: true },
   );
 }
 

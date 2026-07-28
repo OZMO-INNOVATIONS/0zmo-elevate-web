@@ -17,7 +17,7 @@
     this.color = [0, 0, 0];
   }
 
-  const isMobile = window.innerWidth < 768 || ('ontouchstart' in window);
+  const isMobile = window.innerWidth < 768 || "ontouchstart" in window;
 
   let config = {
     SIM_RESOLUTION: isMobile ? 32 : 64,
