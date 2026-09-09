@@ -835,12 +835,16 @@ section {
    ACADEMIES (COURSES)
 ═══════════════════════════════════════════════ */
 .academy-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 2rem;
 }
 
 .academy-card {
+  flex: 1 1 340px;
+  max-width: 380px;
+  width: 100%;
   padding: 2.5rem;
   display: flex;
   flex-direction: column;
