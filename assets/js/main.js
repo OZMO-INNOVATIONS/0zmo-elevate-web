@@ -93,4 +93,42 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   }
+
+  // Application Form WhatsApp Submission
+  const applyForm = document.getElementById("applyForm");
+  if (applyForm) {
+    applyForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+
+      const fname = document.getElementById("fname")?.value.trim() || "";
+      const lname = document.getElementById("lname")?.value.trim() || "";
+      const email = document.getElementById("email")?.value.trim() || "";
+      const nativeSelect = document.getElementById("course");
+      const customSelectText = document.querySelector(".custom-select-text");
+
+      let selectedCourse = "";
+      if (nativeSelect && nativeSelect.value && nativeSelect.selectedIndex >= 0) {
+        selectedCourse = nativeSelect.options[nativeSelect.selectedIndex].text.trim();
+      } else if (
+        customSelectText &&
+        customSelectText.textContent &&
+        customSelectText.textContent.trim() !== "Select Academy Program"
+      ) {
+        selectedCourse = customSelectText.textContent.trim();
+      }
+
+      if (!fname || !lname || !email || !selectedCourse) {
+        alert("Please fill out all fields and select an Academy Program.");
+        return;
+      }
+
+      const phoneNumber = "918590353253";
+      const message = `Hello OZMO Elevate!\nI would like to submit an application.\n\n*First Name:* ${fname}\n*Last Name:* ${lname}\n*Email:* ${email}\n*Program:* ${selectedCourse}`;
+
+      const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+
+      window.open(whatsappUrl, "_blank");
+    });
+  }
 });
+
